@@ -1,49 +1,47 @@
-// Wait for the DOM to finish loading before running any code
+// Ensure the script runs after the page loads
 document.addEventListener('DOMContentLoaded', function () {
-    // Select DOM elements
+    // Select page elements
     const addButton = document.getElementById('add-task-btn');
     const taskInput = document.getElementById('task-input');
     const taskList = document.getElementById('task-list');
 
-    // Function to add a new task
+    // Function to add a task
     function addTask() {
-        // Get and trim the input value
         const taskText = taskInput.value.trim();
 
-        // If input is empty, show an alert and stop
         if (taskText === '') {
             alert('Please enter a task.');
             return;
         }
 
-        // Create a new list item for the task
+        // Create list item
         const li = document.createElement('li');
         li.textContent = taskText;
 
-        // Create the Remove button
+        // Create remove button
         const removeButton = document.createElement('button');
         removeButton.textContent = 'Remove';
         removeButton.className = 'remove-btn';
 
-        // Set up the click event to remove this task
+        // Remove task when button is clicked
         removeButton.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Attach the Remove button to the list item
+        // Add button to task item
         li.appendChild(removeButton);
 
-        // Add the new task to the task list
+        // Add task item to the list
         taskList.appendChild(li);
 
-        // Clear the input field
+        // Clear input field
         taskInput.value = '';
     }
 
-    // Add click event to the "Add Task" button
+    // Add task when the button is clicked
     addButton.addEventListener('click', addTask);
 
-    // Add keypress event to allow adding task with Enter key
+    // Add task when Enter is pressed
     taskInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             addTask();
